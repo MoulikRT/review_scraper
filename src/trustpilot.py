@@ -1,9 +1,12 @@
 import scrapy
+from typing import Any, Iterator, Optional, Union
+from scrapy.http import Response, Request
 
 class TrustpilotSpider(scrapy.Spider):
     name = 'trustpilot'
+    start_urls: list[str]
     
-    def __init__(self, company_url=None, *args, **kwargs):
+    def __init__(self, company_url: Optional[str] = None, *args: Any, **kwargs: Any) -> None:
         super(TrustpilotSpider, self).__init__(*args, **kwargs)
         if company_url:
             self.start_urls = [company_url]
@@ -11,14 +14,14 @@ class TrustpilotSpider(scrapy.Spider):
             # Replace with the company URL you want to scrape
             self.start_urls = ['https://www.trustpilot.com/review/www.fiverr.com']
 
-    def parse(self, response):
+    def parse(self, response: Response) -> Iterator[Union[Request, dict[str, Any]]]:
         # Find all review containers
         reviews = response.css('div[data-testid="service-review-card-v2"]')
         
         for review in reviews:
             # Extract star rating from the image src
-            star_img_src = review.css('img.CDS_StarRating_starRating__614d2e::attr(src)').get()
-            star_count = None
+            star_img_src: Optional[str] = review.css('img.CDS_StarRating_starRating__614d2e::attr(src)').get()
+            star_count: Optional[str] = None
             if star_img_src:
                 # Extract number from 'stars-X.svg'
                 star_count = star_img_src.split('stars-')[-1].split('.')[0]
@@ -38,7 +41,7 @@ class TrustpilotSpider(scrapy.Spider):
             }
             
         # Follow pagination if available
-        next_page = response.css('a[data-pagination-button-next="true"]::attr(href)').get()
+        next_page: Optional[str] = response.css('a[data-pagination-button-next="true"]::attr(href)').get()
         if next_page:
             yield response.follow(next_page, self.parse)
 
