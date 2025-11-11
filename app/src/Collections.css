@@ -1,0 +1,200 @@
+.collections-panel {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Header layout improvements */
+.collections-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.collections-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.create-collection-btn {
+  padding: 0.625rem 1.25rem;
+  background-color: var(--accent-primary);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.create-collection-btn:hover:not(:disabled) {
+  background-color: var(--accent-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.create-collection-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.create-collection-form {
+  padding: 1rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  margin-bottom: 1rem;
+}
+
+.collection-name-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+.collection-name-input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--accent-primary-light);
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 0.625rem 1.25rem;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--accent-primary);
+  color: var(--bg-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-primary-dark);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.no-collections {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-tertiary);
+}
+
+.collections-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.collection-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}
+
+.collection-item:hover {
+  background-color: var(--bg-secondary);
+  border-color: var(--accent-primary-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.collection-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.collection-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.collection-meta {
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+}
+
+.collection-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: 1rem;
+}
+
+.collection-action-btn {
+  padding: 0.5rem 0.875rem;
+  background-color: var(--bg-secondary);
+  color: var(--accent-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.collection-action-btn:hover {
+  background-color: var(--accent-primary);
+  color: var(--bg-primary);
+}
+
+.collection-action-btn.delete {
+  color: var(--accent-danger);
+}
+
+.collection-action-btn.delete:hover {
+  background-color: var(--accent-danger);
+  color: var(--bg-primary);
+}
+
+.selection-info {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: var(--accent-primary-light);
+  border-radius: var(--radius-md);
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--accent-primary);
+  font-weight: 500;
+}

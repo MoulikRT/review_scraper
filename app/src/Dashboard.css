@@ -8,143 +8,162 @@
 .dashboard-container h1 {
   font-size: 2rem;
   margin-bottom: 2rem;
-  color: #213547;
+  color: var(--text-primary);
 }
 
+/* Modern word cloud card with improved aesthetics */
 .word-cloud-container {
-  background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 1.5rem;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
   margin-bottom: 2rem;
   transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
 }
 
 .word-cloud-container:hover {
-  border-color: rgba(0, 0, 0, 0.2);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent-primary-light);
+  box-shadow: var(--shadow-md);
 }
 
 .word-cloud-container h2 {
   font-size: 1.25rem;
-  margin-bottom: 1rem;
-  color: #213547;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
   font-weight: 600;
 }
 
+/* Flexbox word cloud with better spacing and hover effects */
 .word-cloud {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem 1rem;
+  gap: 1rem;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
-  min-height: 150px;
-  background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
-  border-radius: 6px;
+  padding: 1.5rem;
+  min-height: 180px;
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  border-radius: var(--radius-md);
 }
 
 .word-cloud-word {
   display: inline-block;
-  color: #646cff;
+  color: var(--accent-primary);
   cursor: pointer;
   transition: all 0.2s ease;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
   user-select: none;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .word-cloud-word:hover {
-  color: #ffffff;
-  background-color: #646cff;
-  transform: scale(1.1);
-  box-shadow: 0 2px 8px rgba(100, 108, 255, 0.4);
+  color: var(--bg-primary);
+  background-color: var(--accent-primary);
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
 }
 
 .dashboard-loading {
   text-align: center;
   padding: 3rem;
   font-size: 1.2rem;
-  color: #213547;
+  color: var(--text-secondary);
 }
 
+/* Modern metrics grid with refined card design */
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .metric-card {
-  background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 1.5rem;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
   transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+  border-left: 4px solid var(--border-color);
 }
 
 .metric-card:hover {
-  background-color: #f9f9f9;
-  border-color: rgba(0, 0, 0, 0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: var(--bg-secondary);
+  border-color: var(--accent-primary-light);
+  border-left-color: var(--accent-primary);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
 }
 
 .metric-card.positive {
-  border-left: 4px solid #28a745;
+  border-left-color: var(--accent-secondary);
+}
+
+.metric-card.positive:hover {
+  border-left-color: var(--accent-secondary);
 }
 
 .metric-card.negative {
-  border-left: 4px solid #dc3545;
+  border-left-color: var(--accent-danger);
+}
+
+.metric-card.negative:hover {
+  border-left-color: var(--accent-danger);
 }
 
 .metric-label {
-  font-size: 0.875rem;
-  color: rgba(0, 0, 0, 0.6);
-  margin-bottom: 0.5rem;
-  font-weight: 500;
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .metric-value {
-  font-size: 2rem;
+  font-size: 2.25rem;
   font-weight: 700;
-  color: #213547;
-  line-height: 1.2;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: 0.5rem;
 }
 
 .metric-subtext {
-  font-size: 0.75rem;
-  color: rgba(0, 0, 0, 0.5);
-  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
 }
 
 .metric-value.positive {
-  color: #28a745;
+  color: var(--accent-secondary);
 }
 
 .metric-value.negative {
-  color: #dc3545;
+  color: var(--accent-danger);
 }
 
+/* Responsive chart grid */
 .charts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
   gap: 1.5rem;
 }
 
 .chart-card {
-  background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 1.5rem;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
   transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
 }
 
 .chart-card:hover {
-  border-color: rgba(0, 0, 0, 0.2);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent-primary-light);
+  box-shadow: var(--shadow-md);
 }
 
 .chart-card.full-width {
@@ -152,30 +171,36 @@
 }
 
 .chart-card h2 {
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-  color: #213547;
+  font-size: 1.125rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
   font-weight: 600;
 }
 
 .word-frequency-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .word-frequency-card {
-  background-color: #f9f9f9;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 1rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.word-frequency-card:hover {
+  border-color: var(--accent-primary-light);
+  box-shadow: var(--shadow-sm);
 }
 
 .word-frequency-card h3 {
   font-size: 1rem;
-  margin-bottom: 0.75rem;
-  color: #213547;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
   font-weight: 600;
 }
 
@@ -187,32 +212,32 @@
 
 .word-tag {
   display: inline-block;
-  padding: 0.25rem 0.5rem;
-  background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  color: #213547;
+  padding: 0.375rem 0.75rem;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
   font-weight: 500;
+  font-size: 0.85rem;
   transition: all 0.2s ease;
 }
 
 .word-tag:hover {
-  background-color: #646cff;
-  color: #ffffff;
-  border-color: #646cff;
-  transform: scale(1.05);
+  background-color: var(--accent-primary);
+  color: var(--bg-primary);
+  border-color: var(--accent-primary);
+  transform: scale(1.08);
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .charts-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .chart-card.full-width {
     grid-column: 1;
   }
-  
+
   .metrics-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -220,5 +245,8 @@
   .word-frequency-grid {
     grid-template-columns: 1fr;
   }
-}
 
+  .dashboard-container {
+    padding: 1rem;
+  }
+}

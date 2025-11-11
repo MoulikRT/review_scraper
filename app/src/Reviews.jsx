@@ -1,12 +1,49 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import { useVirtualizer } from '@tanstack/react-virtual'
+import AdvancedSearch from './AdvancedSearch'
+import ExportTools from './ExportTools'
+import ReviewGrouping from './ReviewGrouping'
+import CalendarView from './CalendarView'
+import Collections from './Collections'
 import './Reviews.css'
+
+// Helper function to detect user type
+const detectUserType = (text) => {
+  if (!text) return 'unknown'
+  const lowerText = text.toLowerCase()
+  
+  const sellerKeywords = [
+    'seller', 'freelancer', 'gig', 'delivery', 'order', 'client', 'buyer',
+    'commission', 'fees', 'withdraw', 'payment', 'funds', 'clearance',
+    'impressions', 'ranking', 'algorithm', 'success score', 'top rated'
+  ]
+  
+  const buyerKeywords = [
+    'hired', 'purchased', 'bought', 'paid', 'service', 'project',
+    'developer', 'designer', 'work', 'delivered', 'scammed', 'fraud'
+  ]
+  
+  const sellerCount = sellerKeywords.filter(kw => lowerText.includes(kw)).length
+  const buyerCount = buyerKeywords.filter(kw => lowerText.includes(kw)).length
+  
+  if (sellerCount > buyerCount) return 'seller'
+  if (buyerCount > sellerCount) return 'buyer'
+  return 'unknown'
+}
 
 function Reviews({ reviews = [], loading = false, filterWord = null, onClearFilter = null }) {
   const [sortBy, setSortBy] = useState('date-desc')
   const [filterRating, setFilterRating] = useState('all')
   const [isGridView, setIsGridView] = useState(false)
   const [gridColumns, setGridColumns] = useState(3)
+  const [advancedFilters, setAdvancedFilters] = useState(null)
+  const [showGrouping, setShowGrouping] = useState(false)
+  const [groupedReviews, setGroupedReviews] = useState(null)
+  const [showCalendar, setShowCalendar] = useState(false)
+  const [selectedDateReviews, setSelectedDateReviews] = useState(null)
+  const [selectedReviews, setSelectedReviews] = useState(new Set())
+  const [collectionReviews, setCollectionReviews] = useState(null)
+  const [showCollections, setShowCollections] = useState(false)
   const parentRef = useRef(null)
   const gridContainerRef = useRef(null)
 
@@ -60,20 +97,105 @@ function Reviews({ reviews = [], loading = false, filterWord = null, onClearFilt
   }
 
   const filteredAndSortedReviews = useMemo(() => {
+    // Priority: collectionReviews > selectedDateReviews > groupedReviews > filtered reviews
+    if (collectionReviews && collectionReviews.length > 0) {
+      return collectionReviews
+    }
+    
+    if (selectedDateReviews && selectedDateReviews.length > 0) {
+      return selectedDateReviews
+    }
+    
+    if (groupedReviews && groupedReviews.length > 0) {
+      return groupedReviews
+    }
+    
     let filtered = reviews
 
-    // Filter by word (case-insensitive search in review text)
-    if (filterWord) {
-      const searchTerm = filterWord.toLowerCase()
-      filtered = filtered.filter(review => {
-        const reviewText = (review.review_text || '').toLowerCase()
-        return reviewText.includes(searchTerm)
-      })
-    }
+    // Apply advanced filters if available
+    if (advancedFilters) {
+      const filters = advancedFilters
+      
+      // Search text filter
+      if (filters.searchText) {
+        const searchTerm = filters.searchText.toLowerCase()
+        filtered = filtered.filter(review => {
+          const reviewText = (review.review_text || '').toLowerCase()
+          const reviewerName = (review.reviewer_name || '').toLowerCase()
+          
+          if (filters.searchInReplies) {
+            return reviewText.includes(searchTerm) || reviewerName.includes(searchTerm)
+          } else {
+            // Extract main text (without reply)
+            const replyPattern = /Reply\s+from\s+Fiverr?[:\s]/i
+            const match = reviewText.search(replyPattern)
+            const mainText = match !== -1 ? reviewText.substring(0, match) : reviewText
+            return mainText.includes(searchTerm) || reviewerName.includes(searchTerm)
+          }
+        })
+      }
+      
+      // Rating filter
+      if (filters.filterRating && filters.filterRating !== 'all') {
+        filtered = filtered.filter(review => review.star_rating === filters.filterRating)
+      }
+      
+      // User type filter
+      if (filters.filterUserType && filters.filterUserType !== 'all') {
+        filtered = filtered.filter(review => {
+          const userType = detectUserType(review.review_text)
+          return userType === filters.filterUserType
+        })
+      }
+      
+      // Date range filter
+      if (filters.dateRange && (filters.dateRange.start || filters.dateRange.end)) {
+        filtered = filtered.filter(review => {
+          const reviewDate = parseDate(review.date)
+          if (filters.dateRange.start) {
+            const startDate = new Date(filters.dateRange.start)
+            if (reviewDate < startDate) return false
+          }
+          if (filters.dateRange.end) {
+            const endDate = new Date(filters.dateRange.end)
+            endDate.setHours(23, 59, 59, 999) // Include entire end day
+            if (reviewDate > endDate) return false
+          }
+          return true
+        })
+      }
+      
+      // Useful count filter
+      if (filters.minUsefulCount !== null && filters.minUsefulCount !== undefined) {
+        filtered = filtered.filter(review => {
+          const usefulCount = parseInt(review.useful_count) || 0
+          return usefulCount >= filters.minUsefulCount
+        })
+      }
+      
+      // Has reply filter
+      if (filters.hasReply && filters.hasReply !== 'all') {
+        const hasReplyPattern = /Reply\s+from\s+Fiverr?[:\s]/i
+        if (filters.hasReply === 'yes') {
+          filtered = filtered.filter(review => hasReplyPattern.test(review.review_text || ''))
+        } else {
+          filtered = filtered.filter(review => !hasReplyPattern.test(review.review_text || ''))
+        }
+      }
+    } else {
+      // Legacy filterWord support
+      if (filterWord) {
+        const searchTerm = filterWord.toLowerCase()
+        filtered = filtered.filter(review => {
+          const reviewText = (review.review_text || '').toLowerCase()
+          return reviewText.includes(searchTerm)
+        })
+      }
 
-    // Filter by rating
-    if (filterRating !== 'all') {
-      filtered = filtered.filter(review => review.star_rating === filterRating)
+      // Legacy rating filter
+      if (filterRating !== 'all') {
+        filtered = filtered.filter(review => review.star_rating === filterRating)
+      }
     }
 
     // Sort reviews
@@ -93,7 +215,7 @@ function Reviews({ reviews = [], loading = false, filterWord = null, onClearFilt
     })
 
     return sorted
-  }, [reviews, sortBy, filterRating, filterWord])
+  }, [reviews, sortBy, filterRating, filterWord, advancedFilters, groupedReviews, selectedDateReviews, collectionReviews])
 
   // Calculate grid columns based on container width
   useEffect(() => {
@@ -158,17 +280,38 @@ function Reviews({ reviews = [], loading = false, filterWord = null, onClearFilt
     return { mainText: text, reply: null }
   }
 
-  // Highlight filtered word in text
-  const highlightWord = (text, word) => {
-    if (!text || !word) return text
+  // Highlight search terms in text
+  const highlightSearchTerms = (text) => {
+    if (!text) return text
     
-    const regex = new RegExp(`(${word})`, 'gi')
-    return text.split(regex).map((part, index) => {
-      if (part.toLowerCase() === word.toLowerCase()) {
+    const searchTerms = getSearchTerms()
+    if (searchTerms.length === 0) return text
+    
+    // Create a regex that matches any of the search terms
+    const escapedTerms = searchTerms.map(term => term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+    const regex = new RegExp(`(${escapedTerms.join('|')})`, 'gi')
+    
+    const parts = text.split(regex)
+    return parts.map((part, index) => {
+      const isMatch = searchTerms.some(term => 
+        part.toLowerCase() === term.toLowerCase()
+      )
+      if (isMatch) {
         return <mark key={index} className="highlighted-word">{part}</mark>
       }
       return part
     })
+  }
+
+  // Get search terms for highlighting
+  const getSearchTerms = () => {
+    if (advancedFilters && advancedFilters.searchText) {
+      return advancedFilters.searchText.split(/\s+/).filter(term => term.length > 0)
+    }
+    if (filterWord) {
+      return [filterWord]
+    }
+    return []
   }
 
   if (loading) {
@@ -187,7 +330,12 @@ function Reviews({ reviews = [], loading = false, filterWord = null, onClearFilt
     <div className="reviews-container">
       <h1>Trustpilot Reviews ({filteredAndSortedReviews.length} of {reviews.length})</h1>
       
-      {filterWord && (
+      <AdvancedSearch 
+        reviews={reviews}
+        onFiltersChange={setAdvancedFilters}
+      />
+      
+      {filterWord && !advancedFilters && (
         <div className="filter-badge">
           <span className="filter-label">Filtered by word:</span>
           <span className="filter-word">"{filterWord}"</span>
@@ -197,6 +345,116 @@ function Reviews({ reviews = [], loading = false, filterWord = null, onClearFilt
             </button>
           )}
         </div>
+      )}
+      
+      {advancedFilters && advancedFilters.searchText && (
+        <div className="filter-badge">
+          <span className="filter-label">Search:</span>
+          <span className="filter-word">"{advancedFilters.searchText}"</span>
+          <button className="filter-clear" onClick={() => setAdvancedFilters(null)} title="Clear filters">
+            ×
+          </button>
+        </div>
+      )}
+
+      <ExportTools 
+        reviews={reviews}
+        filteredReviews={filteredAndSortedReviews}
+        filters={advancedFilters}
+      />
+
+      <div className="grouping-toggle">
+        <button 
+          className={`toggle-btn ${showGrouping ? 'active' : ''}`}
+          onClick={() => setShowGrouping(!showGrouping)}
+        >
+          {showGrouping ? '▼' : '▶'} Group Similar Reviews
+        </button>
+      </div>
+
+      {showGrouping && (
+        <ReviewGrouping 
+          reviews={filteredAndSortedReviews}
+          onGroupSelect={(selectedReviews) => {
+            setGroupedReviews(selectedReviews)
+            setShowGrouping(false)
+          }}
+        />
+      )}
+
+      {groupedReviews && groupedReviews.length > 0 && (
+        <div className="filter-badge">
+          <span className="filter-label">Showing grouped reviews:</span>
+          <span className="filter-word">{groupedReviews.length} reviews</span>
+          <button className="filter-clear" onClick={() => setGroupedReviews(null)} title="Clear grouping">
+            ×
+          </button>
+        </div>
+      )}
+
+      {selectedDateReviews && (
+        <div className="filter-badge">
+          <span className="filter-label">Showing reviews from selected date:</span>
+          <span className="filter-word">{selectedDateReviews.length} reviews</span>
+          <button className="filter-clear" onClick={() => setSelectedDateReviews(null)} title="Clear date filter">
+            ×
+          </button>
+        </div>
+      )}
+
+      <div className="view-toggles">
+        <button 
+          className={`toggle-btn ${showCalendar ? 'active' : ''}`}
+          onClick={() => setShowCalendar(!showCalendar)}
+        >
+          {showCalendar ? '▼' : '▶'} Calendar View
+        </button>
+        <button 
+          className={`toggle-btn ${showCollections ? 'active' : ''}`}
+          onClick={() => setShowCollections(!showCollections)}
+        >
+          {showCollections ? '▼' : '▶'} Collections
+        </button>
+        {selectedReviews.size > 0 && (
+          <button 
+            className="toggle-btn active"
+            onClick={() => setSelectedReviews(new Set())}
+          >
+            Clear Selection ({selectedReviews.size})
+          </button>
+        )}
+      </div>
+
+      {showCollections && (
+        <Collections
+          selectedReviews={selectedReviews}
+          reviews={reviews}
+          onCollectionSelect={(reviewIds) => {
+            const reviewsToShow = reviews.filter(r => reviewIds.includes(r.source_url))
+            setCollectionReviews(reviewsToShow)
+            setShowCollections(false)
+          }}
+        />
+      )}
+
+      {collectionReviews && collectionReviews.length > 0 && (
+        <div className="filter-badge">
+          <span className="filter-label">Showing collection:</span>
+          <span className="filter-word">{collectionReviews.length} reviews</span>
+          <button className="filter-clear" onClick={() => setCollectionReviews(null)} title="Clear collection">
+            ×
+          </button>
+        </div>
+      )}
+
+      {showCalendar && (
+        <CalendarView 
+          reviews={filteredAndSortedReviews}
+          onDateSelect={(dateKey, reviews) => {
+            setSelectedDateReviews(reviews)
+            setShowCalendar(false)
+          }}
+        />
       )}
       
       <div className="controls">
@@ -267,9 +525,29 @@ function Reviews({ reviews = [], loading = false, filterWord = null, onClearFilt
             {filteredAndSortedReviews.map((review, index) => {
               const { mainText, reply } = parseReviewText(review.review_text)
               
+              const reviewId = review.source_url
+              const isSelected = selectedReviews.has(reviewId)
+              
               return (
-                <div key={index} className="review-item">
+                <div key={index} className={`review-item ${isSelected ? 'selected' : ''}`}>
                 <div className="review-card">
+                  {selectedReviews.size > 0 && (
+                    <div className="review-checkbox">
+                      <input
+                        type="checkbox"
+                        checked={isSelected}
+                        onChange={(e) => {
+                          const newSelected = new Set(selectedReviews)
+                          if (e.target.checked) {
+                            newSelected.add(reviewId)
+                          } else {
+                            newSelected.delete(reviewId)
+                          }
+                          setSelectedReviews(newSelected)
+                        }}
+                      />
+                    </div>
+                  )}
                   <div className="review-header">
                     <div className="reviewer-info">
                       <div className="avatar-container">
@@ -318,16 +596,13 @@ function Reviews({ reviews = [], loading = false, filterWord = null, onClearFilt
                     </div>
                   </div>
                   <div className="review-text">
-                    {filterWord ? highlightWord(mainText, filterWord) : mainText}
+                    {highlightSearchTerms(mainText)}
                   </div>
                   {reply && (
                     <div className="review-reply">
                       <div className="review-reply-label">Reply from Fiverr:</div>
                       <div className="review-reply-text">
-                        {filterWord 
-                          ? highlightWord(reply.replace(/^Reply\s+from\s+Fiverr?:\s*/i, ''), filterWord)
-                          : reply.replace(/^Reply\s+from\s+Fiverr?:\s*/i, '')
-                        }
+                        {highlightSearchTerms(reply.replace(/^Reply\s+from\s+Fiverr?:\s*/i, ''))}
                       </div>
                     </div>
                   )}
@@ -360,12 +635,15 @@ function Reviews({ reviews = [], loading = false, filterWord = null, onClearFilt
             {virtualizer.getVirtualItems().map((virtualRow) => {
               const review = filteredAndSortedReviews[virtualRow.index]
               const { mainText, reply } = parseReviewText(review.review_text)
+              const reviewId = review.source_url
+              const isSelected = selectedReviews.has(reviewId)
+              
               return (
                 <div
                   key={virtualRow.key}
                   data-index={virtualRow.index}
                   ref={virtualizer.measureElement}
-                  className="review-item"
+                  className={`review-item ${isSelected ? 'selected' : ''}`}
                   style={{
                     position: 'absolute',
                     top: 0,
@@ -375,6 +653,23 @@ function Reviews({ reviews = [], loading = false, filterWord = null, onClearFilt
                   }}
                 >
                   <div className="review-card">
+                    {selectedReviews.size > 0 && (
+                      <div className="review-checkbox">
+                        <input
+                          type="checkbox"
+                          checked={isSelected}
+                          onChange={(e) => {
+                            const newSelected = new Set(selectedReviews)
+                            if (e.target.checked) {
+                              newSelected.add(reviewId)
+                            } else {
+                              newSelected.delete(reviewId)
+                            }
+                            setSelectedReviews(newSelected)
+                          }}
+                        />
+                      </div>
+                    )}
                     <div className="review-header">
                       <div className="reviewer-info">
                         <div className="avatar-container">
@@ -423,16 +718,13 @@ function Reviews({ reviews = [], loading = false, filterWord = null, onClearFilt
                       </div>
                     </div>
                     <div className="review-text">
-                    {filterWord ? highlightWord(mainText, filterWord) : mainText}
+                    {highlightSearchTerms(mainText)}
                   </div>
                     {reply && (
                       <div className="review-reply">
                         <div className="review-reply-label">Reply from Fiverr:</div>
                         <div className="review-reply-text">
-                        {filterWord 
-                          ? highlightWord(reply.replace(/^Reply\s+from\s+Fiverr?:\s*/i, ''), filterWord)
-                          : reply.replace(/^Reply\s+from\s+Fiverr?:\s*/i, '')
-                        }
+                        {highlightSearchTerms(reply.replace(/^Reply\s+from\s+Fiverr?:\s*/i, ''))}
                       </div>
                       </div>
                     )}
@@ -461,4 +753,3 @@ function Reviews({ reviews = [], loading = false, filterWord = null, onClearFilt
 }
 
 export default Reviews
-
