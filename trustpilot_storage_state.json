@@ -1,0 +1,260 @@
+{
+  "cookies": [
+    {
+      "name": "_GRECAPTCHA",
+      "value": "09ADiQh0doZeEDyKylfttwtsjDH5zdGDHvDzT7WZy5ebAEWzhrsZiXAoCYoeXvdKmTCpu-GiinTUBFRE7JsNafvS4",
+      "domain": "www.google.com",
+      "path": "/recaptcha",
+      "expires": 1778432152.360134,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "TP.uuid",
+      "value": "edc4a57a-9ef9-4e51-8102-d09fb516c09a",
+      "domain": ".trustpilot.com",
+      "path": "/",
+      "expires": 1797440125.35582,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_hjSession_391767",
+      "value": "eyJpZCI6IjIzYmYyM2FiLWU1M2YtNDRjZS1iYTQ2LWM0ZWUyOWJkMDQ5MSIsImMiOjE3NjI4ODAwODkxMjksInMiOjAsInIiOjAsInNiIjowLCJzciI6MCwic2UiOjAsImZzIjoxLCJzcCI6MH0=",
+      "domain": ".trustpilot.com",
+      "path": "/",
+      "expires": 1762881919,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "g_state",
+      "value": "{\"i_l\":0,\"i_ll\":1762880089148,\"i_b\":\"Ww+sQVKTyY2n23QKApkzcj9Dl1xsqksooOQXnRfRmNQ\"}",
+      "domain": ".trustpilot.com",
+      "path": "/",
+      "expires": 1778432089,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ajs_anonymous_id",
+      "value": "fc297b49-a04b-42af-bcf0-7d89c70e3a0a",
+      "domain": ".trustpilot.com",
+      "path": "/",
+      "expires": 1794416151,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "amplitude_idundefinedtrustpilot.com",
+      "value": "eyJvcHRPdXQiOmZhbHNlLCJzZXNzaW9uSWQiOm51bGwsImxhc3RFdmVudFRpbWUiOm51bGwsImV2ZW50SWQiOjAsImlkZW50aWZ5SWQiOjAsInNlcXVlbmNlTnVtYmVyIjowfQ==",
+      "domain": ".trustpilot.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_hjHasCachedUserAttributes",
+      "value": "true",
+      "domain": "www.trustpilot.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_ga",
+      "value": "GA1.1.670547617.1762880090",
+      "domain": ".trustpilot.com",
+      "path": "/",
+      "expires": 1797440151.790319,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "li_sugr",
+      "value": "b6209f06-388e-468c-8e58-ffa284162682",
+      "domain": ".linkedin.com",
+      "path": "/",
+      "expires": 1770656152.025616,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "bcookie",
+      "value": "\"v=2&31756dbc-aad3-4f2e-8155-a2648e10d36b\"",
+      "domain": ".linkedin.com",
+      "path": "/",
+      "expires": 1794416152.025653,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "lidc",
+      "value": "\"b=VGST09:s=V:r=V:a=V:p=V:g=3331:u=1:x=1:i=1762880090:t=1762966490:v=2:sig=AQG4K1ty4yMy53oUbdLJG7XUlMqrVSqK\"",
+      "domain": ".linkedin.com",
+      "path": "/",
+      "expires": 1762966490.58811,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "UserMatchHistory",
+      "value": "AQJDUQTi42zipgAAAZpz13KOQ9dqmqBkH928UxqmIsiqY4nrQPL7Rt1oIf9LHdLhEDh_j37pRuPcEQ",
+      "domain": ".linkedin.com",
+      "path": "/",
+      "expires": 1765472090.813084,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "AnalyticsSyncHistory",
+      "value": "AQIhf7gsppVN-QAAAZpz13KOMYHr_Rbn3SA-PU5ZbA4Qa3FkKjvDQlm5YyVQDN4BVNu_xZtvzbapJnXQp1Qz-w",
+      "domain": ".linkedin.com",
+      "path": "/",
+      "expires": 1765472090.813151,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "bscookie",
+      "value": "\"v=1&2025111116545043ba9d5b-5663-4ea7-8e85-2ea0a691731bAQFf0YQSAeYg_mOYg5m-3yflKm237LXJ\"",
+      "domain": ".www.linkedin.com",
+      "path": "/",
+      "expires": 1794416092.060042,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "OptanonAlertBoxClosed",
+      "value": "2025-11-11T16:54:51.429Z",
+      "domain": ".trustpilot.com",
+      "path": "/",
+      "expires": 1794416091,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "IDE",
+      "value": "AHWqTUkwBb9pwIF1OSI59dBaB_hPrBhyz1x89dzrFggTAD3_0jSOCQuaJ1wluI1k",
+      "domain": ".doubleclick.net",
+      "path": "/",
+      "expires": 1797440099.344492,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_gcl_au",
+      "value": "1.1.269488803.1762880090.129294335.1762880099.1762880104",
+      "domain": ".trustpilot.com",
+      "path": "/",
+      "expires": 1770656090,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "tp-consumer-id",
+      "value": "69136a69ec11db216a24df25",
+      "domain": ".trustpilot.com",
+      "path": "/",
+      "expires": 1770656122.109906,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "jwt",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb25zdW1lcklkIjoiNjkxMzZhNjllYzExZGIyMTZhMjRkZjI1IiwiaGFzQWNjZXB0ZWRUZXJtcyI6dHJ1ZSwiaXNCbG9ja2VkRm9yUmVwb3J0aW5nIjpmYWxzZSwiYWNjZXNzVG9rZW4iOiJxQzJnVHJHMnBoZFRIUzBKSlAydFZOY2E2Z3FUIiwiYXV0aGVudGljYXRpb25Tb3VyY2UiOiJ2ZXJpZmljYXRpb24tY29kZSIsImlhdCI6MTc2Mjg4MDEyMiwiZXhwIjoxNzcwNjU2MTIyfQ.9Aq63F_hffveokh79bZIjnEsRcpCF3rYS0qLhfGv7k8",
+      "domain": ".trustpilot.com",
+      "path": "/",
+      "expires": 1770656122.110044,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "ajs_user_id",
+      "value": "1915d3df567e9358a8371005f61e92231b453aa0",
+      "domain": ".trustpilot.com",
+      "path": "/",
+      "expires": 1794416151,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ar_debug",
+      "value": "1",
+      "domain": ".www.google-analytics.com",
+      "path": "/",
+      "expires": 1770656122.30213,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_hjSessionUser_391767",
+      "value": "eyJpZCI6IjQwNjJiNTliLTI1NTMtNWI1NC1iMGVkLTI1OTM2MjM4NzBmNSIsImNyZWF0ZWQiOjE3NjI4ODAwODkxMjksImV4aXN0aW5nIjp0cnVlfQ==",
+      "domain": ".trustpilot.com",
+      "path": "/",
+      "expires": 1794416151,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "OptanonConsent",
+      "value": "isGpcEnabled=0&datestamp=Tue+Nov+11+2025+22%3A25%3A51+GMT%2B0530+(India+Standard+Time)&version=202503.1.0&browserGpcFlag=0&isIABGlobal=false&hosts=&consentId=d0eb9115-2b94-4992-a8d8-935846bde2ae&interactionCount=1&isAnonUser=1&landingPath=NotLandingPage&groups=C0001%3A1%2CC0002%3A1%2CC0003%3A1%2CC0004%3A1&intType=1&geolocation=IN%3BTN&AwaitingReconsent=false",
+      "domain": ".trustpilot.com",
+      "path": "/",
+      "expires": 1794416151,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "amplitude_id_67f7b7e6c8cb1b558b0c5bda2f747b07trustpilot.com",
+      "value": "eyJkZXZpY2VJZCI6ImZjMjk3YjQ5LWEwNGItNDJhZi1iY2YwLTdkODljNzBlM2EwYSIsInVzZXJJZCI6IjE5MTVkM2RmNTY3ZTkzNThhODM3MTAwNWY2MWU5MjIzMWI0NTNhYTAiLCJvcHRPdXQiOmZhbHNlLCJzZXNzaW9uSWQiOjE3NjI4ODAwODk0NTMsImxhc3RFdmVudFRpbWUiOjE3NjI4ODAxNTE3MzUsImV2ZW50SWQiOjEzLCJpZGVudGlmeUlkIjoyLCJzZXF1ZW5jZU51bWJlciI6MTV9",
+      "domain": ".trustpilot.com",
+      "path": "/",
+      "expires": 1797440151.735567,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ga_11HBWMC274",
+      "value": "GS2.1.s1762880090$o1$g1$t1762880151$j60$l0$h0",
+      "domain": ".trustpilot.com",
+      "path": "/",
+      "expires": 1797440151.790156,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://www.trustpilot.com",
+      "localStorage": []
+    }
+  ]
+}
