@@ -26,8 +26,8 @@ class TrustpilotSpider(scrapy.Spider):
     }
     
     # Target number of reviews to collect
-    target_reviews = 2000
-    max_pages = 100  # Maximum pages to try (increased to get more reviews)
+    target_reviews = 4000
+    max_pages = 200  # Maximum pages to try (increased to get more reviews)
     
     custom_settings = {
         "USER_AGENT": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",

@@ -12,3 +12,7 @@ wheels/
 
 reviews.json
 reviews.csv
+
+trustpilot_cookies.json
+trustpilot_storage_state.json
+trustpilot_checkpoint.json

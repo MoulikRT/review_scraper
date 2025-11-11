@@ -1,0 +1,172 @@
+2025-11-12 02:44:46 [scrapy.utils.log] INFO: Scrapy 2.13.3 started (bot: scrapybot)
+2025-11-12 02:44:46 [scrapy.utils.log] INFO: Versions:
+{'lxml': '6.0.0',
+ 'libxml2': '2.14.4',
+ 'cssselect': '1.3.0',
+ 'parsel': '1.10.0',
+ 'w3lib': '2.3.1',
+ 'Twisted': '25.5.0',
+ 'Python': '3.13.2 (main, Feb  4 2025, 14:51:09) [Clang 16.0.0 '
+           '(clang-1600.0.26.6)]',
+ 'pyOpenSSL': '25.1.0 (OpenSSL 3.5.2 5 Aug 2025)',
+ 'cryptography': '45.0.6',
+ 'Platform': 'macOS-26.0.1-arm64-arm-64bit-Mach-O'}
+2025-11-12 02:44:46 [trustpilot] INFO: Loaded checkpoint: 2008 reviews scraped, last page: 100
+2025-11-12 02:44:46 [trustpilot] INFO: Loaded 25 cookies from trustpilot_cookies.json
+2025-11-12 02:44:46 [trustpilot] INFO: Updated Playwright context with storage_state for authentication
+2025-11-12 02:44:46 [scrapy.addons] INFO: Enabled addons:
+[]
+2025-11-12 02:44:46 [scrapy.extensions.telnet] INFO: Telnet Password: 8882b3aaa195d306
+2025-11-12 02:44:46 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.memusage.MemoryUsage',
+ 'scrapy.extensions.feedexport.FeedExporter',
+ 'scrapy.extensions.logstats.LogStats',
+ 'scrapy.extensions.throttle.AutoThrottle']
+2025-11-12 02:44:46 [scrapy.crawler] INFO: Overridden settings:
+{'AUTOTHROTTLE_ENABLED': True,
+ 'AUTOTHROTTLE_MAX_DELAY': 10,
+ 'AUTOTHROTTLE_START_DELAY': 3,
+ 'AUTOTHROTTLE_TARGET_CONCURRENCY': 1.5,
+ 'CONCURRENT_REQUESTS': 2,
+ 'DOWNLOAD_DELAY': 3,
+ 'DOWNLOAD_TIMEOUT': 60,
+ 'LOG_LEVEL': 'INFO',
+ 'RANDOMIZE_DOWNLOAD_DELAY': 0.5,
+ 'RETRY_HTTP_CODES': [403, 429, 500, 502, 503, 504],
+ 'RETRY_TIMES': 3,
+ 'SPIDER_LOADER_WARN_ONLY': True,
+ 'USER_AGENT': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
+               'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 '
+               'Safari/537.36'}
+2025-11-12 02:44:46 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2025-11-12 02:44:46 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.start.StartSpiderMiddleware',
+ 'scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2025-11-12 02:44:46 [scrapy.middleware] INFO: Enabled item pipelines:
+[]
+2025-11-12 02:44:46 [scrapy.core.engine] INFO: Spider opened
+2025-11-12 02:44:46 [py.warnings] WARNING: /Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/scrapy/core/spidermw.py:433: ScrapyDeprecationWarning: trustpilot.TrustpilotSpider defines the deprecated start_requests() method. start_requests() has been deprecated in favor of a new method, start(), to support asynchronous code execution. start_requests() will stop being called in a future version of Scrapy. If you use Scrapy 2.13 or higher only, replace start_requests() with start(); note that start() is a coroutine (async def). If you need to maintain compatibility with lower Scrapy versions, when overriding start_requests() in a spider class, override start() as well; you can use super() to reuse the inherited start() implementation without copy-pasting. See the release notes of Scrapy 2.13 for details: https://docs.scrapy.org/en/2.13/news.html
+  warn(
+
+2025-11-12 02:44:46 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2025-11-12 02:44:46 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6024
+2025-11-12 02:44:46 [scrapy-playwright] INFO: Starting download handler
+2025-11-12 02:44:46 [scrapy-playwright] INFO: Starting download handler
+2025-11-12 02:44:46 [scrapy-playwright] INFO: Launching 1 startup context(s)
+2025-11-12 02:44:46 [scrapy-playwright] INFO: Launching 1 startup context(s)
+2025-11-12 02:44:46 [scrapy-playwright] INFO: Launching browser chromium
+2025-11-12 02:44:46 [scrapy-playwright] INFO: Launching browser chromium
+2025-11-12 02:44:46 [scrapy-playwright] INFO: Browser chromium launched
+2025-11-12 02:44:46 [scrapy-playwright] INFO: Browser chromium launched
+2025-11-12 02:44:46 [scrapy-playwright] INFO: Startup context(s) launched
+2025-11-12 02:44:46 [scrapy-playwright] INFO: Startup context(s) launched
+2025-11-12 02:44:46 [trustpilot] INFO: Using authenticated session with storage_state from trustpilot_storage_state.json
+2025-11-12 02:45:10 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2025-11-12 02:45:49 [scrapy-playwright] WARNING: Closing page due to failed request: <GET https://www.trustpilot.com/review/www.fiverr.com> exc_type=<class 'playwright._impl._errors.TimeoutError'> exc_msg=Timeout 90000.0ms exceeded.
+Traceback (most recent call last):
+  File "/Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/scrapy_playwright/handler.py", line 433, in _download_request_with_retry
+    return await self._download_request_with_page(request, page, spider)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/scrapy_playwright/handler.py", line 481, in _download_request_with_page
+    await self._apply_page_methods(page, request, spider)
+  File "/Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/scrapy_playwright/handler.py", line 632, in _apply_page_methods
+    pm.result = await _maybe_await(method(*pm.args, **pm.kwargs))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/scrapy_playwright/_utils.py", line 22, in _maybe_await
+    return await obj
+           ^^^^^^^^^
+  File "/Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/playwright/async_api/_generated.py", line 9088, in wait_for_load_state
+    await self._impl_obj.wait_for_load_state(state=state, timeout=timeout)
+  File "/Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/playwright/_impl/_page.py", line 576, in wait_for_load_state
+    return await self._main_frame.wait_for_load_state(**locals_to_params(locals()))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/playwright/_impl/_frame.py", line 273, in wait_for_load_state
+    return await self._wait_for_load_state_impl(state, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/playwright/_impl/_frame.py", line 301, in _wait_for_load_state_impl
+    await waiter.result()
+playwright._impl._errors.TimeoutError: Timeout 90000.0ms exceeded.
+2025-11-12 02:45:49 [scrapy.core.scraper] ERROR: Error downloading <GET https://www.trustpilot.com/review/www.fiverr.com>
+Traceback (most recent call last):
+  File "/Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/twisted/internet/defer.py", line 1853, in _inlineCallbacks
+    result = context.run(
+        cast(Failure, result).throwExceptionIntoGenerator, gen
+    )
+  File "/Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/twisted/python/failure.py", line 467, in throwExcep2025-11-12 02:45:56 [trustpilot] INFO: Found 69 reviews on page 9
+2025-11-12 02:45:56 [trustpilot] INFO: Following pagination to page 10 (collected 2011/4000 reviews)
+2025-11-12 02:46:04 [trustpilot] INFO: Found 69 reviews on page 10
+2025-11-12 02:46:04 [trustpilot] INFO: Following pagination to page 11 (collected 2011/4000 reviews)
+2025-11-12 02:46:05 [asyncio] ERROR: Task was destroyed but it is pending!
+task: <Task pending name='Task-7740' coro=<ScrapyPlaywrightDownloadHandler._get_response_and_download.<locals>._handle_response() running at /Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/scrapy_playwright/handler.py:556> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[AsyncIOEventEmitter._emit_run.<locals>.callback() at /Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/pyee/asyncio.py:97]>
+2025-11-12 02:46:05 [asyncio] ERROR: Task was destroyed but it is pending!
+task: <Task pending name='Task-8686' coro=<ScrapyPlaywrightDownloadHandler._get_response_and_download.<locals>._handle_response() running at /Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/scrapy_playwright/handler.py:556> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[AsyncIOEventEmitter._emit_run.<locals>.callback() at /Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/pyee/asyncio.py:97]>
+2025-11-12 02:46:05 [asyncio] ERROR: Task was destroyed but it is pending!
+task: <Task pending name='Task-9730' coro=<ScrapyPlaywrightDownloadHandler._get_response_and_download.<locals>._handle_response() running at /Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/scrapy_playwright/handler.py:556> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[AsyncIOEventEmitter._emit_run.<locals>.callback() at /Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/pyee/asyncio.py:97]>
+2025-11-12 02:46:12 [trustpilot] INFO: Found 69 reviews on page 11
+2025-11-12 02:46:12 [trustpilot] INFO: Following pagination to page 12 (collected 2011/4000 reviews)
+2025-11-12 02:46:20 [trustpilot] INFO: Found 69 reviews on page 12
+2025-11-12 02:46:20 [trustpilot] INFO: Following pagination to page 13 (collected 2011/4000 reviews)
+2025-11-12 02:46:27 [trustpilot] INFO: Found 69 reviews on page 13
+2025-11-12 02:46:27 [trustpilot] INFO: Following pagination to page 14 (collected 2011/4000 reviews)
+2025-11-12 02:46:28 [asyncio] ERROR: Task was destroyed but it is pending!
+task: <Task pending name='Task-10732' coro=<ScrapyPlaywrightDownloadHandler._get_response_and_download.<locals>._handle_response() running at /Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/scrapy_playwright/handler.py:556> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[AsyncIOEventEmitter._emit_run.<locals>.callback() at /Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/pyee/asyncio.py:97]>
+2025-11-12 02:46:28 [asyncio] ERROR: Task was destroyed but it is pending!
+task: <Task pending name='Task-11614' coro=<ScrapyPlaywrightDownloadHandler._get_response_and_download.<locals>._handle_response() running at /Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/scrapy_playwright/handler.py:556> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[AsyncIOEventEmitter._emit_run.<locals>.callback() at /Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/pyee/asyncio.py:97]>
+2025-11-12 02:46:28 [asyncio] ERROR: Task was destroyed but it is pending!
+task: <Task pending name='Task-12459' coro=<ScrapyPlaywrightDownloadHandler._get_response_and_download.<locals>._handle_response() running at /Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/scrapy_playwright/handler.py:556> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[AsyncIOEventEmitter._emit_run.<locals>.callback() at /Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/pyee/asyncio.py:97]>
+2025-11-12 02:46:35 [trustpilot] INFO: Found 69 reviews on page 14
+2025-11-12 02:46:35 [trustpilot] INFO: Following pagination to page 15 (collected 2011/4000 reviews)
+1,
+ 'playwright/request_count/method/POST': 15,
+ 'playwright/request_count/navigation': 12,
+ 'playwright/request_count/resource_type/document': 12,
+ 'playwright/request_count/resource_type/fetch': 38,
+ 'playwright/request_count/resource_type/font': 4,
+ 'playwright/request_count/resource_type/image': 43,
+ 'playwright/request_count/resource_type/other': 3,
+ 'playwright/request_count/resource_type/ping': 1,
+ 'playwright/request_count/resource_type/script': 54,
+ 'playwright/request_count/resource_type/stylesheet': 5,
+ 'playwright/request_count/resource_type/xhr': 6,
+ 'playwright/response_count': 165,
+ 'playwright/response_count/method/GET': 150,
+ 'playwright/response_count/method/POST': 15,
+ 'playwright/response_count/resource_type/document': 12,
+ 'playwright/response_count/resource_type/fetch': 38,
+ 'playwright/response_count/resource_type/font': 4,
+ 'playwright/response_count/resource_type/image': 42,
+ 'playwright/response_count/resource_type/other': 3,
+ 'playwright/response_count/resource_type/ping': 1,
+ 'playwright/response_count/resource_type/script': 54,
+ 'playwright/response_count/resource_type/stylesheet': 5,
+ 'playwright/response_count/resource_type/xhr': 6,
+ 'responses_per_minute': 0.0,
+ 'scheduler/dequeued': 1,
+ 'scheduler/dequeued/memory': 1,
+ 'scheduler/enqueued': 1,
+ 'scheduler/enqueued/memory': 1,
+ 'start_time': datetime.datetime(2025, 11, 11, 21, 14, 10, 67544, tzinfo=datetime.timezone.utc)}
+2025-11-12 02:45:49 [scrapy.core.engine] INFO: Spider closed (finished)
+2025-11-12 02:45:49 [scrapy-playwright] INFO: Closing download handler
+2025-11-12 02:45:49 [scrapy-playwright] INFO: Closing browser
+2025-11-12 02:45:49 [scrapy-playwright] INFO: Closing download handler
+2025-11-12 02:45:49 [scrapy-playwright] INFO: Closing browser
+2025-11-12 02:45:49 [asyncio] ERROR: Task was destroyed but it is pending!
+task: <Task pending name='Task-749' coro=<ScrapyPlaywrightDownloadHandler._get_response_and_download.<locals>._handle_response() running at /Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/scrapy_playwright/handler.py:556> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[AsyncIOEventEmitter._emit_run.<locals>.callback() at /Users/ZS/Developer/Code/Work/Xlancr/research/review_scraper/.venv/lib/python3.13/site-packages/pyee/asyncio.py:97]>
