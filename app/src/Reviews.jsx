@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useMemo } from 'react'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import './Reviews.css'
 
-function Reviews({ reviews = [], loading = false }) {
+function Reviews({ reviews = [], loading = false, filterWord = null, onClearFilter = null }) {
   const [sortBy, setSortBy] = useState('date-desc')
   const [filterRating, setFilterRating] = useState('all')
   const [isGridView, setIsGridView] = useState(false)
@@ -62,6 +62,15 @@ function Reviews({ reviews = [], loading = false }) {
   const filteredAndSortedReviews = useMemo(() => {
     let filtered = reviews
 
+    // Filter by word (case-insensitive search in review text)
+    if (filterWord) {
+      const searchTerm = filterWord.toLowerCase()
+      filtered = filtered.filter(review => {
+        const reviewText = (review.review_text || '').toLowerCase()
+        return reviewText.includes(searchTerm)
+      })
+    }
+
     // Filter by rating
     if (filterRating !== 'all') {
       filtered = filtered.filter(review => review.star_rating === filterRating)
@@ -84,7 +93,7 @@ function Reviews({ reviews = [], loading = false }) {
     })
 
     return sorted
-  }, [reviews, sortBy, filterRating])
+  }, [reviews, sortBy, filterRating, filterWord])
 
   // Calculate grid columns based on container width
   useEffect(() => {
@@ -149,6 +158,19 @@ function Reviews({ reviews = [], loading = false }) {
     return { mainText: text, reply: null }
   }
 
+  // Highlight filtered word in text
+  const highlightWord = (text, word) => {
+    if (!text || !word) return text
+    
+    const regex = new RegExp(`(${word})`, 'gi')
+    return text.split(regex).map((part, index) => {
+      if (part.toLowerCase() === word.toLowerCase()) {
+        return <mark key={index} className="highlighted-word">{part}</mark>
+      }
+      return part
+    })
+  }
+
   if (loading) {
     return <div className="loading">Loading reviews...</div>
   }
@@ -164,6 +186,18 @@ function Reviews({ reviews = [], loading = false }) {
   return (
     <div className="reviews-container">
       <h1>Trustpilot Reviews ({filteredAndSortedReviews.length} of {reviews.length})</h1>
+      
+      {filterWord && (
+        <div className="filter-badge">
+          <span className="filter-label">Filtered by word:</span>
+          <span className="filter-word">"{filterWord}"</span>
+          {onClearFilter && (
+            <button className="filter-clear" onClick={onClearFilter} title="Clear filter">
+              ×
+            </button>
+          )}
+        </div>
+      )}
       
       <div className="controls">
         <div className="control-group">
@@ -283,11 +317,18 @@ function Reviews({ reviews = [], loading = false }) {
                       </div>
                     </div>
                   </div>
-                  <div className="review-text">{mainText}</div>
+                  <div className="review-text">
+                    {filterWord ? highlightWord(mainText, filterWord) : mainText}
+                  </div>
                   {reply && (
                     <div className="review-reply">
                       <div className="review-reply-label">Reply from Fiverr:</div>
-                      <div className="review-reply-text">{reply.replace(/^Reply\s+from\s+Fiverr?:\s*/i, '')}</div>
+                      <div className="review-reply-text">
+                        {filterWord 
+                          ? highlightWord(reply.replace(/^Reply\s+from\s+Fiverr?:\s*/i, ''), filterWord)
+                          : reply.replace(/^Reply\s+from\s+Fiverr?:\s*/i, '')
+                        }
+                      </div>
                     </div>
                   )}
                   <div className="review-footer">
@@ -381,11 +422,18 @@ function Reviews({ reviews = [], loading = false }) {
                         </div>
                       </div>
                     </div>
-                    <div className="review-text">{mainText}</div>
+                    <div className="review-text">
+                    {filterWord ? highlightWord(mainText, filterWord) : mainText}
+                  </div>
                     {reply && (
                       <div className="review-reply">
                         <div className="review-reply-label">Reply from Fiverr:</div>
-                        <div className="review-reply-text">{reply.replace(/^Reply\s+from\s+Fiverr?:\s*/i, '')}</div>
+                        <div className="review-reply-text">
+                        {filterWord 
+                          ? highlightWord(reply.replace(/^Reply\s+from\s+Fiverr?:\s*/i, ''), filterWord)
+                          : reply.replace(/^Reply\s+from\s+Fiverr?:\s*/i, '')
+                        }
+                      </div>
                       </div>
                     )}
                     <div className="review-footer">

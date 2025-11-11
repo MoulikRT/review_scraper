@@ -11,6 +11,56 @@
   color: #213547;
 }
 
+.word-cloud-container {
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  transition: all 0.2s ease;
+}
+
+.word-cloud-container:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.word-cloud-container h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: #213547;
+  font-weight: 600;
+}
+
+.word-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  min-height: 150px;
+  background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+  border-radius: 6px;
+}
+
+.word-cloud-word {
+  display: inline-block;
+  color: #646cff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  user-select: none;
+}
+
+.word-cloud-word:hover {
+  color: #ffffff;
+  background-color: #646cff;
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(100, 108, 255, 0.4);
+}
+
 .dashboard-loading {
   text-align: center;
   padding: 3rem;

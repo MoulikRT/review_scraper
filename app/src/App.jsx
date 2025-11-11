@@ -7,6 +7,7 @@ function App() {
   const [activeTab, setActiveTab] = useState('reviews')
   const [reviews, setReviews] = useState([])
   const [loading, setLoading] = useState(true)
+  const [filterWord, setFilterWord] = useState(null)
 
   useEffect(() => {
     fetch('/trustpilot_reviews.json')
@@ -43,9 +44,15 @@ function App() {
         </button>
       </div>
       {activeTab === 'reviews' ? (
-        <Reviews reviews={reviews} loading={loading} />
+        <Reviews reviews={reviews} loading={loading} filterWord={filterWord} onClearFilter={() => setFilterWord(null)} />
       ) : (
-        <Dashboard reviews={reviews} />
+        <Dashboard 
+          reviews={reviews} 
+          onWordClick={(word) => {
+            setFilterWord(word)
+            setActiveTab('reviews')
+          }} 
+        />
       )}
     </div>
   )

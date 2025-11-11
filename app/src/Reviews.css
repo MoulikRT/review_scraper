@@ -11,6 +11,62 @@
   color: #213547;
 }
 
+.filter-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background-color: #e7f3ff;
+  border: 1px solid #646cff;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.filter-label {
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 500;
+}
+
+.filter-word {
+  color: #646cff;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.filter-clear {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: #646cff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.filter-clear:hover {
+  background-color: #646cff;
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.highlighted-word {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 0.1em 0.2em;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
 .controls {
   display: flex;
   gap: 1.5rem;

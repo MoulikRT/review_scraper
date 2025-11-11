@@ -200,7 +200,7 @@ const calculateWordFrequency = (texts, minLength = 4) => {
     .map(([word, count]) => ({ word, count }))
 }
 
-function Dashboard({ reviews }) {
+function Dashboard({ reviews, onWordClick }) {
 
   // Process data for charts
   const chartData = useMemo(() => {
@@ -438,6 +438,10 @@ function Dashboard({ reviews }) {
       wordFreqByRating[rating] = calculateWordFrequency(reviewsForRating, 4).slice(0, 10)
     })
 
+    // Overall word frequency for word cloud
+    const allReviewTexts = enhancedReviews.map(r => r.mainText)
+    const overallWordFreq = calculateWordFrequency(allReviewTexts, 4).slice(0, 50)
+
     // Temporal volatility (standard deviation of ratings over time)
     const volatilityData = timeSeriesData.map((item, index, arr) => {
       if (index < 7) return null // Need at least 7 days for meaningful volatility
@@ -534,6 +538,7 @@ function Dashboard({ reviews }) {
       qualityByRating,
       avgQualityScore,
       wordFreqByRating,
+      overallWordFreq,
       volatilityData,
       ratingTrend,
       firstHalfAvg,
@@ -547,9 +552,46 @@ function Dashboard({ reviews }) {
 
   const COLORS = ['#dc3545', '#ffc107', '#ffc107', '#28a745', '#28a745']
 
+  const handleWordClick = (word) => {
+    if (onWordClick) {
+      onWordClick(word)
+    }
+  }
+
+  // Calculate font sizes for word cloud based on frequency
+  const maxCount = chartData.overallWordFreq[0]?.count || 1
+  const minFontSize = 14
+  const maxFontSize = 48
+
   return (
     <div className="dashboard-container">
       <h1>Review Analytics Dashboard</h1>
+
+      {/* Word Cloud */}
+      <div className="word-cloud-container">
+        <h2>Word Cloud - Click to Filter Reviews</h2>
+        <div className="word-cloud">
+          {chartData.overallWordFreq.map((item, index) => {
+            const fontSize = minFontSize + ((item.count / maxCount) * (maxFontSize - minFontSize))
+            const opacity = 0.6 + ((item.count / maxCount) * 0.4)
+            return (
+              <span
+                key={index}
+                className="word-cloud-word"
+                style={{
+                  fontSize: `${fontSize}px`,
+                  opacity: opacity,
+                  fontWeight: item.count > maxCount * 0.5 ? 700 : item.count > maxCount * 0.3 ? 600 : 500,
+                }}
+                onClick={() => handleWordClick(item.word)}
+                title={`${item.count} mentions - Click to filter reviews`}
+              >
+                {item.word}
+              </span>
+            )
+          })}
+        </div>
+      </div>
 
       {/* Metrics Cards */}
       <div className="metrics-grid">
