@@ -31,6 +31,38 @@ const detectUserType = (text) => {
   return 'unknown'
 }
 
+// Helper function to count words in text
+const countWords = (text) => {
+  if (!text) return 0
+  return text.trim().split(/\s+/).filter(word => word.length > 0).length
+}
+
+// Helper function to get word count category
+const getWordCountCategory = (text) => {
+  const wordCount = countWords(text)
+  if (wordCount < 50) return 'short'
+  if (wordCount <= 150) return 'medium'
+  return 'large'
+}
+
+// Helper function to parse review text and separate main text from reply
+const parseReviewText = (text) => {
+  if (!text) return { mainText: '', reply: null }
+  
+  // Match patterns like "Reply from Fiverr" or "Reply from Fiver" (case insensitive)
+  // Also handles variations like "Reply from Fiverr:" with optional colon
+  const replyPattern = /Reply\s+from\s+Fiverr?[:\s]/i
+  const match = text.search(replyPattern)
+  
+  if (match !== -1) {
+    const mainText = text.substring(0, match).trim()
+    const reply = text.substring(match).trim()
+    return { mainText, reply }
+  }
+  
+  return { mainText: text, reply: null }
+}
+
 function Reviews({ reviews = [], loading = false, filterWord = null, onClearFilter = null }) {
   const [sortBy, setSortBy] = useState('date-desc')
   const [filterRating, setFilterRating] = useState('all')
@@ -44,6 +76,8 @@ function Reviews({ reviews = [], loading = false, filterWord = null, onClearFilt
   const [selectedReviews, setSelectedReviews] = useState(new Set())
   const [collectionReviews, setCollectionReviews] = useState(null)
   const [showCollections, setShowCollections] = useState(false)
+  const [wordCountFilter, setWordCountFilter] = useState('all')
+  const [hasReplyFilter, setHasReplyFilter] = useState('all')
   const parentRef = useRef(null)
   const gridContainerRef = useRef(null)
 
@@ -173,7 +207,7 @@ function Reviews({ reviews = [], loading = false, filterWord = null, onClearFilt
         })
       }
       
-      // Has reply filter
+      // Has reply filter (from advanced filters)
       if (filters.hasReply && filters.hasReply !== 'all') {
         const hasReplyPattern = /Reply\s+from\s+Fiverr?[:\s]/i
         if (filters.hasReply === 'yes') {
@@ -181,6 +215,15 @@ function Reviews({ reviews = [], loading = false, filterWord = null, onClearFilt
         } else {
           filtered = filtered.filter(review => !hasReplyPattern.test(review.review_text || ''))
         }
+      }
+      
+      // Word count filter (from advanced filters)
+      if (filters.wordCountFilter && filters.wordCountFilter !== 'all') {
+        filtered = filtered.filter(review => {
+          const { mainText } = parseReviewText(review.review_text || '')
+          const category = getWordCountCategory(mainText)
+          return category === filters.wordCountFilter
+        })
       }
     } else {
       // Legacy filterWord support
@@ -195,6 +238,29 @@ function Reviews({ reviews = [], loading = false, filterWord = null, onClearFilt
       // Legacy rating filter
       if (filterRating !== 'all') {
         filtered = filtered.filter(review => review.star_rating === filterRating)
+      }
+    }
+
+    // Apply quick filters (word count and has reply) if not set in advanced filters
+    // Advanced filters take precedence, so only apply quick filters if advanced filters are 'all' or not set
+    if (!advancedFilters || !advancedFilters.hasReply || advancedFilters.hasReply === 'all') {
+      if (hasReplyFilter !== 'all') {
+        const hasReplyPattern = /Reply\s+from\s+Fiverr?[:\s]/i
+        if (hasReplyFilter === 'yes') {
+          filtered = filtered.filter(review => hasReplyPattern.test(review.review_text || ''))
+        } else {
+          filtered = filtered.filter(review => !hasReplyPattern.test(review.review_text || ''))
+        }
+      }
+    }
+
+    if (!advancedFilters || !advancedFilters.wordCountFilter || advancedFilters.wordCountFilter === 'all') {
+      if (wordCountFilter !== 'all') {
+        filtered = filtered.filter(review => {
+          const { mainText } = parseReviewText(review.review_text || '')
+          const category = getWordCountCategory(mainText)
+          return category === wordCountFilter
+        })
       }
     }
 
@@ -215,7 +281,7 @@ function Reviews({ reviews = [], loading = false, filterWord = null, onClearFilt
     })
 
     return sorted
-  }, [reviews, sortBy, filterRating, filterWord, advancedFilters, groupedReviews, selectedDateReviews, collectionReviews])
+  }, [reviews, sortBy, filterRating, filterWord, advancedFilters, groupedReviews, selectedDateReviews, collectionReviews, wordCountFilter, hasReplyFilter])
 
   // Calculate grid columns based on container width
   useEffect(() => {
@@ -261,24 +327,6 @@ function Reviews({ reviews = [], loading = false, filterWord = null, onClearFilt
     estimateSize: () => isGridView ? rowHeight + gridGap : 120,
     overscan: isGridView ? 2 : 5,
   })
-
-
-  const parseReviewText = (text) => {
-    if (!text) return { mainText: '', reply: null }
-    
-    // Match patterns like "Reply from Fiverr" or "Reply from Fiver" (case insensitive)
-    // Also handles variations like "Reply from Fiverr:" with optional colon
-    const replyPattern = /Reply\s+from\s+Fiverr?[:\s]/i
-    const match = text.search(replyPattern)
-    
-    if (match !== -1) {
-      const mainText = text.substring(0, match).trim()
-      const reply = text.substring(match).trim()
-      return { mainText, reply }
-    }
-    
-    return { mainText: text, reply: null }
-  }
 
   // Highlight search terms in text
   const highlightSearchTerms = (text) => {
@@ -487,6 +535,35 @@ function Reviews({ reviews = [], loading = false, filterWord = null, onClearFilt
             <option value="3">3 Stars</option>
             <option value="2">2 Stars</option>
             <option value="1">1 Star</option>
+          </select>
+        </div>
+
+        <div className="control-group">
+          <label htmlFor="word-count-select">Word Count:</label>
+          <select
+            id="word-count-select"
+            value={wordCountFilter}
+            onChange={(e) => setWordCountFilter(e.target.value)}
+            className="control-select"
+          >
+            <option value="all">All</option>
+            <option value="short">Short (&lt; 50 words)</option>
+            <option value="medium">Medium (50-150 words)</option>
+            <option value="large">Large (&gt; 150 words)</option>
+          </select>
+        </div>
+
+        <div className="control-group">
+          <label htmlFor="has-reply-select">Has Reply:</label>
+          <select
+            id="has-reply-select"
+            value={hasReplyFilter}
+            onChange={(e) => setHasReplyFilter(e.target.value)}
+            className="control-select"
+          >
+            <option value="all">All</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
           </select>
         </div>
 

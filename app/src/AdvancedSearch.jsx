@@ -58,6 +58,7 @@ function AdvancedSearch({ reviews = [], onFiltersChange, onSaveSearch }) {
   const [searchInReplies, setSearchInReplies] = useState(false)
   const [minUsefulCount, setMinUsefulCount] = useState('')
   const [hasReply, setHasReply] = useState('all')
+  const [wordCountFilter, setWordCountFilter] = useState('all')
   const [savedSearches, setSavedSearches] = useState([])
   const [showAdvanced, setShowAdvanced] = useState(false)
 
@@ -104,6 +105,7 @@ function AdvancedSearch({ reviews = [], onFiltersChange, onSaveSearch }) {
         searchInReplies,
         minUsefulCount,
         hasReply,
+        wordCountFilter,
       },
     }
 
@@ -125,6 +127,7 @@ function AdvancedSearch({ reviews = [], onFiltersChange, onSaveSearch }) {
     setSearchInReplies(filters.searchInReplies || false)
     setMinUsefulCount(filters.minUsefulCount || '')
     setHasReply(filters.hasReply || 'all')
+    setWordCountFilter(filters.wordCountFilter || 'all')
     setShowAdvanced(true)
   }
 
@@ -142,6 +145,7 @@ function AdvancedSearch({ reviews = [], onFiltersChange, onSaveSearch }) {
     setSearchInReplies(false)
     setMinUsefulCount('')
     setHasReply('all')
+    setWordCountFilter('all')
   }
 
   // Apply filters and notify parent
@@ -154,12 +158,13 @@ function AdvancedSearch({ reviews = [], onFiltersChange, onSaveSearch }) {
       searchInReplies,
       minUsefulCount: minUsefulCount ? parseInt(minUsefulCount) : null,
       hasReply,
+      wordCountFilter,
     }
     
     if (onFiltersChange) {
       onFiltersChange(filters)
     }
-  }, [searchText, filterRating, filterUserType, dateRange, searchInReplies, minUsefulCount, hasReply, onFiltersChange])
+  }, [searchText, filterRating, filterUserType, dateRange, searchInReplies, minUsefulCount, hasReply, wordCountFilter, onFiltersChange])
 
   return (
     <div className="advanced-search-container">
@@ -213,6 +218,16 @@ function AdvancedSearch({ reviews = [], onFiltersChange, onSaveSearch }) {
                 <option value="all">All</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
+              </select>
+            </div>
+
+            <div className="filter-group">
+              <label>Word Count:</label>
+              <select value={wordCountFilter} onChange={(e) => setWordCountFilter(e.target.value)}>
+                <option value="all">All</option>
+                <option value="short">Short (&lt; 50 words)</option>
+                <option value="medium">Medium (50-150 words)</option>
+                <option value="large">Large (&gt; 150 words)</option>
               </select>
             </div>
 
