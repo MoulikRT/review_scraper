@@ -81,7 +81,7 @@ function AdvancedSearch({ reviews = [], onFiltersChange, onSaveSearch }) {
     { name: '5-Star Reviews', search: '', rating: '5' },
     { name: 'Recent Complaints', search: 'terrible', rating: '1' },
     { name: 'Support Issues', search: 'support', rating: 'all' },
-    { name: 'Commission/Fees', search: 'commission fee', rating: 'all' },
+    { name: 'Refund Issues', search: 'refund', rating: 'all' },
   ]
 
   const applyQuickFilter = (filter) => {
