@@ -940,7 +940,7 @@ function Dashboard({ reviews, onWordClick }) {
           <div className="word-frequency-grid">
             {Object.entries(chartData.wordFreqByRating).map(([rating, words]) => (
               <div key={rating} className="word-frequency-card">
-                <h3>{rating} Star{rating !== '1' ? 's' : ''}</h3>
+                <h3>{'⭐'.repeat(Number(rating))} {rating} Star{rating !== '1' ? 's' : ''}</h3>
                 <div className="word-list">
                   {words.map((word, idx) => (
                     <span
