@@ -3,6 +3,9 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
+  background-color: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  box-sizing: border-box;
 }
 
 .reviews-container h1 {

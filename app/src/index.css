@@ -1,5 +1,6 @@
 :root {
   /* Modern color system - using compatible CSS approach */
+  --bg-page: #363636;
   --bg-primary: #ffffff;
   --bg-secondary: #f8fafc;
   --bg-tertiary: #f1f5f9;
@@ -44,7 +45,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: var(--bg-primary);
+  background-color: var(--bg-page);
   color: var(--text-primary);
 
   font-synthesis: none;
